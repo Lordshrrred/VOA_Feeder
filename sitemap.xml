@@ -24,4 +24,10 @@
 
   <!-- Blog post URLs are appended here automatically by scripts/generate-post.js -->
 
+  <url>
+    <loc>https://lordshrrred.github.io/VOA_GithubPages/blog/what-nobody-tells-you-about-test-keyword-do-not-publish.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
