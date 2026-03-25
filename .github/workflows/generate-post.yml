@@ -1,0 +1,51 @@
+name: Generate Blog Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: 'SEO keyword or phrase (e.g. "feel stuck in life")'
+        required: true
+        type: string
+      title:
+        description: 'Post title (e.g. "Why You Feel Stuck in Life")'
+        required: true
+        type: string
+      category:
+        description: 'Post category'
+        required: true
+        type: choice
+        options:
+          - Breaking Out
+          - Creative Freedom
+          - Inner Work
+          - AI + Music + Creator Tools
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # No external npm dependencies ~ script uses built-in Node https module
+
+      - name: Generate post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/generate-post.js \
+            --keyword "${{ github.event.inputs.keyword }}" \
+            --title "${{ github.event.inputs.title }}" \
+            --category "${{ github.event.inputs.category }}"

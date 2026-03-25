@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lordshrrred.github.io/VOA_GithubPages/sitemap.xml
