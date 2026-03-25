@@ -7,29 +7,92 @@
   <meta name="description" content="Frequency Rising is an independent blog about the real work of changing your life. Not the highlight reel. The actual process.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://lordshrrred.github.io/VOA_GithubPages/about.html">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="About ~ Frequency Rising">
   <meta property="og:description" content="Frequency Rising is an independent blog about the real work of changing your life. Not the highlight reel. The actual process.">
   <meta property="og:url" content="https://lordshrrred.github.io/VOA_GithubPages/about.html">
   <meta property="og:site_name" content="Frequency Rising">
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0f0a; --bg2: #0e140e; --border: #1a271a;
+      --lime: #39FF14; --lime-dim: #2dcc10;
+      --cyan: #00FFFF; --cyan-dim: #00cccc;
+      --text: #d8e8d8; --muted: #6a8a6a; --max: 1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.05rem; line-height: 1.75;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    a { color: var(--cyan); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--cyan-dim); text-decoration: underline; }
+    h1, h2, h3 { font-family: 'Inter', sans-serif; font-weight: 800; line-height: 1.2; color: #fff; }
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    main { flex: 1; }
 
-  <link rel="stylesheet" href="css/style.css">
+    .nav {
+      position: sticky; top: 0; z-index: 99;
+      background: rgba(10,15,10,.93);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem; max-width: var(--max); margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--lime);
+    }
+    .nav-logo:hover { color: var(--lime-dim); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--lime); text-decoration: none; }
+
+    .page-hero { padding: 4.5rem 0 3rem; border-bottom: 1px solid var(--border); }
+    .section-label {
+      display: inline-block; font-family: 'Inter', sans-serif;
+      font-size: .7rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--lime); margin-bottom: .75rem;
+    }
+    .page-hero h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); margin-bottom: .6rem; }
+    .page-hero p { color: var(--muted); }
+
+    .about-body { padding: 3.5rem 0 5rem; max-width: 700px; }
+    .about-body p { margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.85; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: auto; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .footer-brand {
+      font-family: 'Inter', sans-serif; font-weight: 800; font-size: .9rem;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--lime);
+      display: block; margin-bottom: .5rem;
+    }
+    .footer p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .footer a { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .nav-inner { flex-direction: column; gap: .75rem; }
+      .nav-links { gap: 1.25rem; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Nav -->
-  <nav class="site-nav" aria-label="Main navigation">
-    <div class="container">
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
       <a href="index.html" class="nav-logo">Frequency Rising</a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="blog/index.html">Blog</a></li>
         <li><a href="about.html" class="active">About</a></li>
       </ul>
@@ -37,45 +100,33 @@
   </nav>
 
   <main>
-
-    <!-- Page Hero -->
     <section class="page-hero">
-      <div class="container">
-        <div class="gold-line"></div>
-        <h1>About Frequency Rising</h1>
-        <p>What this is and why it exists.</p>
+      <div class="wrap">
+        <span class="section-label">About this site</span>
+        <h1>What Frequency Rising Is</h1>
+        <p>No gurus. No formulas. Just signal.</p>
       </div>
     </section>
 
-    <!-- About Content -->
     <section>
-      <div class="container">
-        <div class="about-content">
+      <div class="wrap">
+        <div class="about-body">
           <p>Frequency Rising is an independent blog about the real work of changing your life. Not the highlight reel. The actual process.</p>
           <p>Articles here cover identity shifts, breaking out of survival mode, creative freedom, inner work, and building something that actually fits who you are.</p>
           <p>No gurus. No formulas. Just signal.</p>
+          <p>A <a href="https://vibrationofawesome.com" target="_blank" rel="noopener">Vibration of Awesome</a> affiliate site.</p>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
+  <footer class="footer">
+    <div class="footer-inner">
       <span class="footer-brand">Frequency Rising</span>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="blog/index.html">Blog</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </div>
-    <div class="container">
-      <p class="footer-copy">&copy; <span id="year"></span> Frequency Rising. All rights reserved.</p>
+      <p>Independent signal for people breaking out and leveling up.</p>
+      <p>A <a href="https://vibrationofawesome.com" target="_blank" rel="noopener">Vibration of Awesome</a> affiliate site.</p>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

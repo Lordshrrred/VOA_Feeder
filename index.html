@@ -4,32 +4,317 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frequency Rising ~ Insights for People Breaking Out and Leveling Up</title>
-  <meta name="description" content="Practical insights on identity shifts, creative freedom, inner work, and building a life that actually fits you. No gurus. No formulas. Just signal.">
+  <meta name="description" content="Real insights on identity shifts, breaking out of survival mode, creative freedom, and building a life that actually fits you. No gurus. No formulas. Just signal.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://lordshrrred.github.io/VOA_GithubPages/">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Frequency Rising ~ Insights for People Breaking Out and Leveling Up">
-  <meta property="og:description" content="Practical insights on identity shifts, creative freedom, inner work, and building a life that actually fits you.">
+  <meta property="og:description" content="Real insights on identity shifts, breaking out of survival mode, creative freedom, and building a life that actually fits you.">
   <meta property="og:url" content="https://lordshrrred.github.io/VOA_GithubPages/">
   <meta property="og:site_name" content="Frequency Rising">
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <link rel="stylesheet" href="css/style.css">
+    /* ---- Variables ---- */
+    :root {
+      --bg:        #0a0f0a;
+      --bg2:       #0e140e;
+      --bg-card:   #111811;
+      --border:    #1a271a;
+      --lime:      #39FF14;
+      --lime-dim:  #2dcc10;
+      --cyan:      #00FFFF;
+      --cyan-dim:  #00cccc;
+      --text:      #d8e8d8;
+      --muted:     #6a8a6a;
+      --max:       1080px;
+      --r:         6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--cyan); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--cyan-dim); text-decoration: underline; }
+
+    h1, h2, h3, h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    main { flex: 1; }
+
+    /* ---- Nav ---- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(10,15,10,.93);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--lime);
+    }
+    .nav-logo:hover { color: var(--lime-dim); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-links a:hover { color: var(--lime); text-decoration: none; }
+
+    /* ---- Hero ---- */
+    .hero {
+      padding: 7rem 0 5.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 10%, rgba(57,255,20,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @keyframes pulse-glow {
+      0%   { text-shadow: 0 0 20px rgba(57,255,20,.25), 0 0 60px rgba(57,255,20,.1); }
+      50%  { text-shadow: 0 0 40px rgba(57,255,20,.5),  0 0 100px rgba(57,255,20,.2); }
+      100% { text-shadow: 0 0 20px rgba(57,255,20,.25), 0 0 60px rgba(57,255,20,.1); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.5rem);
+      max-width: 840px;
+      margin: 0 auto 1.5rem;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .hero h1 .accent { color: var(--lime); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 2.75rem;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: .8rem 2rem;
+      background: var(--lime);
+      color: #0a0f0a;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border-radius: var(--r);
+      transition: background .2s, transform .15s;
+    }
+    .btn:hover {
+      background: var(--lime-dim);
+      color: #0a0f0a;
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+
+    /* ---- Section label ---- */
+    .section-label {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: .75rem;
+    }
+
+    /* ---- Cards ---- */
+    .cards-section { padding: 4.5rem 0; background: var(--bg2); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 2rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .card:hover { border-color: var(--lime); transform: translateY(-3px); }
+
+    .card-emoji { font-size: 1.75rem; margin-bottom: 1rem; }
+
+    .card h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--lime);
+      margin-bottom: .5rem;
+    }
+
+    .card p { font-size: .95rem; color: var(--muted); line-height: 1.65; }
+
+    /* ---- Recent Posts ---- */
+    .recent-section { padding: 4.5rem 0; }
+
+    .section-head { margin-bottom: 2rem; }
+
+    .section-head h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      margin-bottom: .35rem;
+    }
+
+    .section-head p { color: var(--muted); font-size: .95rem; }
+
+    .posts-list { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.6rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      transition: border-color .2s;
+    }
+    .post-card:hover { border-color: var(--lime); }
+
+    .post-cat {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: .35rem;
+    }
+
+    .post-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+    .post-card h3 a { color: #fff; }
+    .post-card h3 a:hover { color: var(--lime); text-decoration: none; }
+
+    .post-desc { font-size: .9rem; color: var(--muted); margin: 0; }
+
+    .post-date {
+      font-family: 'Inter', sans-serif;
+      font-size: .78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      font-family: 'Inter', sans-serif;
+      color: var(--muted);
+      font-size: .95rem;
+      padding: 2rem;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: var(--r);
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      margin-top: auto;
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: .9rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--lime);
+      display: block;
+      margin-bottom: .5rem;
+    }
+    .footer p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .footer a { color: var(--cyan); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 600px) {
+      .nav-inner { flex-direction: column; gap: .75rem; }
+      .nav-links { gap: 1.25rem; }
+      .hero { padding: 4.5rem 0 3.5rem; }
+      .post-card { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
   <!-- Nav -->
-  <nav class="site-nav" aria-label="Main navigation">
-    <div class="container">
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
       <a href="index.html" class="nav-logo">Frequency Rising</a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="blog/index.html">Blog</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
@@ -40,51 +325,47 @@
 
     <!-- Hero -->
     <section class="hero">
-      <div class="container">
-        <h1>You Already Know Something Has to <span>Change.</span></h1>
-        <p class="subheadline">Practical insights on identity shifts, creative freedom, inner work, and building a life that actually fits you.</p>
+      <div class="wrap">
+        <h1>You Already Know Something Has to <span class="accent">Change.</span></h1>
+        <p class="hero-sub">Real insights on identity shifts, breaking out of survival mode, creative freedom, and building a life that actually fits you.</p>
         <a href="blog/index.html" class="btn">Read the Blog</a>
       </div>
     </section>
 
     <!-- Category Cards -->
-    <section class="categories" aria-label="Content categories">
-      <div class="container">
-        <div class="section-header">
-          <div class="gold-line"></div>
-          <h2>What We Cover</h2>
-          <p>Signal across three territories that actually matter.</p>
-        </div>
+    <section class="cards-section">
+      <div class="wrap">
+        <span class="section-label">What we cover</span>
         <div class="cards-grid">
           <div class="card">
-            <div class="card-icon">&#9889;</div>
+            <div class="card-emoji">&#9889;</div>
             <h3>Breaking Out</h3>
-            <p>Identity shifts, reinvention, escaping survival mode. For people who know the current version of their life was built for someone else.</p>
+            <p>Identity shifts ~ reinvention ~ survival mode. For people who know the current version of their life was built for someone else.</p>
           </div>
           <div class="card">
-            <div class="card-icon">&#127775;</div>
+            <div class="card-emoji">&#127775;</div>
             <h3>Creative Freedom</h3>
-            <p>Monetizing creativity, designing your own life, building work that doesn't hollow you out. The real stuff, not the highlight reel version.</p>
+            <p>Monetize creativity ~ life design ~ escape the system. Build work that doesn't hollow you out.</p>
           </div>
           <div class="card">
-            <div class="card-icon">&#9711;</div>
+            <div class="card-emoji">&#9711;</div>
             <h3>Inner Work</h3>
-            <p>Nervous system regulation, shadow work, healing. Not the trendy version. The actual process of getting to know yourself and choosing differently.</p>
+            <p>Nervous system ~ shadow work ~ emotional healing. Not the trendy version. The actual process.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Recent Posts -->
-    <section class="recent-posts" aria-label="Recent posts">
-      <div class="container">
-        <div class="section-header">
-          <div class="gold-line"></div>
-          <h2>Recent Signal</h2>
-          <p>Latest articles from the archive.</p>
+    <section class="recent-section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-label">Latest signal</span>
+          <h2>Recent Posts</h2>
+          <p>What's transmitting right now.</p>
         </div>
-        <div id="recent-posts-container" class="posts-list">
-          <p class="signal-msg">Signal incoming. Check back soon.</p>
+        <div id="posts" class="posts-list">
+          <p class="empty-state">Signal incoming. First transmissions coming soon.</p>
         </div>
       </div>
     </section>
@@ -92,21 +373,44 @@
   </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
+  <footer class="footer">
+    <div class="footer-inner">
       <span class="footer-brand">Frequency Rising</span>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="blog/index.html">Blog</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </div>
-    <div class="container">
-      <p class="footer-copy">&copy; <span id="year"></span> Frequency Rising. All rights reserved.</p>
+      <p>Independent signal for people breaking out and leveling up.</p>
+      <p>A <a href="https://vibrationofawesome.com" target="_blank" rel="noopener">Vibration of Awesome</a> affiliate site.</p>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    (function () {
+      fetch('blog/posts.json')
+        .then(function (r) { return r.json(); })
+        .then(function (posts) {
+          if (!posts || posts.length === 0) return;
+          var recent = posts.slice(0, 3);
+          document.getElementById('posts').innerHTML = recent.map(card).join('');
+        })
+        .catch(function () { /* keep empty state */ });
+
+      function card(p) {
+        var d = '';
+        try { d = new Date(p.date + 'T00:00:00').toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }); }
+        catch(e) { d = p.date; }
+        return '<article class="post-card">' +
+          '<div>' +
+          '<span class="post-cat">' + esc(p.category) + '</span>' +
+          '<h3><a href="' + esc(p.url) + '">' + esc(p.title) + '</a></h3>' +
+          '<p class="post-desc">' + esc(p.description) + '</p>' +
+          '</div>' +
+          '<time class="post-date" datetime="' + esc(p.date) + '">' + d + '</time>' +
+          '</article>';
+      }
+
+      function esc(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+    })();
+  </script>
+
 </body>
 </html>
