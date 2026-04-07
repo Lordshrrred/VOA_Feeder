@@ -11,8 +11,8 @@
     document.querySelectorAll('.nav-links a').forEach(function (link) {
       const href = link.getAttribute('href');
       if (!href) return;
-      const normalized = href.replace(/^\.\.\//, '/VOA_GithubPages/').replace(/^\.\//, '/VOA_GithubPages/');
-      if (path.endsWith(normalized) || (href === 'index.html' && (path === '/VOA_GithubPages/' || path.endsWith('/index.html')))) {
+      const normalized = href.replace(/^\.\.\//, '/VOA_Feeder/').replace(/^\.\//, '/VOA_Feeder/');
+      if (path.endsWith(normalized) || (href === 'index.html' && (path === '/VOA_Feeder/' || path.endsWith('/index.html')))) {
         link.classList.add('active');
       }
     });

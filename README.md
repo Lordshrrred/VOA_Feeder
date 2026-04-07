@@ -1,6 +1,6 @@
 # Frequency Rising
 
-**Live site:** https://lordshrrred.github.io/VOA_GithubPages/
+**Live site:** https://lordshrrred.github.io/VOA_Feeder/
 
 An independent personal development blog and SEO feeder site for [vibrationofawesome.com](https://vibrationofawesome.com). Articles are AI-generated, SEO-optimized, and published automatically via GitHub Actions.
 
@@ -42,18 +42,22 @@ When vibrationofawesome.com publishes a new post, it can automatically trigger a
 curl -X POST \
   -H "Authorization: token YOUR_GITHUB_PAT" \
   -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/Lordshrrred/VOA_GithubPages/dispatches \
+  https://api.github.com/repos/Lordshrrred/VOA_Feeder/dispatches \
   -d '{
     "event_type": "voa-post-published",
     "client_payload": {
       "voa_post_url": "https://vibrationofawesome.com/your-post-slug/",
       "voa_post_title": "Your VOA Post Title",
-      "voa_post_keyword": "your keyword"
+      "voa_post_keyword": "your keyword",
+      "voa_post_slug": "your-post-slug"
     }
   }'
 ```
 
-The workflow (`voa-trigger.yml`) will generate a related-but-distinct article that links back to the VOA post naturally.
+The workflow (`voa-trigger.yml`) now generates a related-but-distinct article with:
+- a unique feeder title
+- a deterministic feeder slug based on the VOA source slug
+- an enforced backlink to the specific VOA post
 
 **Note:** `YOUR_GITHUB_PAT` is a Personal Access Token with `repo` scope. Generate one at github.com/settings/tokens. This is different from `GITHUB_TOKEN` which is only available inside Actions runs.
 
@@ -62,7 +66,7 @@ The workflow (`voa-trigger.yml`) will generate a related-but-distinct article th
 ## Required secrets
 
 Add these in **Settings > Secrets and variables > Actions** at:
-`github.com/Lordshrrred/VOA_GithubPages/settings/secrets/actions`
+`github.com/Lordshrrred/VOA_Feeder/settings/secrets/actions`
 
 | Secret | Description |
 |--------|-------------|

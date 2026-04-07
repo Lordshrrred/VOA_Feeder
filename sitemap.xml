@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://lordshrrred.github.io/VOA_GithubPages/</loc>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://lordshrrred.github.io/VOA_GithubPages/about.html</loc>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/about.html</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://lordshrrred.github.io/VOA_GithubPages/blog/</loc>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/blog/</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -25,7 +25,7 @@
   <!-- Blog post URLs are appended here automatically by scripts/generate-post.js -->
 
   <url>
-    <loc>https://lordshrrred.github.io/VOA_GithubPages/blog/what-nobody-tells-you-about-test-keyword-do-not-publish.html</loc>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/blog/what-nobody-tells-you-about-test-keyword-do-not-publish.html</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

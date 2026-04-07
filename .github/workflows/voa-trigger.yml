@@ -6,13 +6,14 @@ name: VOA Trigger ~ Auto Feeder Post
 # curl -X POST \
 #   -H "Authorization: token YOUR_GITHUB_PAT" \
 #   -H "Accept: application/vnd.github.v3+json" \
-#   https://api.github.com/repos/Lordshrrred/VOA_GithubPages/dispatches \
+#   https://api.github.com/repos/Lordshrrred/VOA_Feeder/dispatches \
 #   -d '{
 #     "event_type": "voa-post-published",
 #     "client_payload": {
 #       "voa_post_url": "https://vibrationofawesome.com/your-post-slug/",
 #       "voa_post_title": "Your VOA Post Title",
-#       "voa_post_keyword": "your keyword"
+#       "voa_post_keyword": "your keyword",
+#       "voa_post_slug": "your-post-slug"
 #     }
 #   }'
 #
@@ -43,26 +44,14 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build feeder article title
-        id: build_title
-        run: |
-          VOA_TITLE="${{ github.event.client_payload.voa_post_title }}"
-          KEYWORD="${{ github.event.client_payload.voa_post_keyword }}"
-
-          # Generate a related-but-distinct title by appending a new angle
-          FEEDER_TITLE="What Nobody Tells You About ${KEYWORD^}"
-
-          echo "feeder_title=${FEEDER_TITLE}" >> $GITHUB_OUTPUT
-          echo "keyword=${KEYWORD}" >> $GITHUB_OUTPUT
-
       - name: Generate feeder post
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node scripts/generate-post.js \
-            --keyword "${{ steps.build_title.outputs.keyword }}" \
-            --title "${{ steps.build_title.outputs.feeder_title }}" \
+            --keyword "${{ github.event.client_payload.voa_post_keyword }}" \
             --category "Breaking Out" \
             --voa_post_url "${{ github.event.client_payload.voa_post_url }}" \
-            --voa_post_title "${{ github.event.client_payload.voa_post_title }}"
+            --voa_post_title "${{ github.event.client_payload.voa_post_title }}" \
+            --voa_post_slug "${{ github.event.client_payload.voa_post_slug }}"
