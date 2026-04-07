@@ -53,6 +53,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VOA_FEEDER_TRIGGER_TOKEN: ${{ secrets.VOA_FEEDER_TRIGGER_TOKEN }}
         run: |
           node scripts/generate-post.js \
             --keyword "${{ github.event.client_payload.voa_post_keyword }}" \

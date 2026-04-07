@@ -30,6 +30,7 @@ const crypto = require('crypto');
 const { execSync } = require('child_process');
 
 const SITE_BASE = 'https://lordshrrred.github.io/VOA_Feeder';
+const MAIN_REPO = 'Lordshrrred/VibrationofAwesome';
 const SUFFIXES = ['-signal', '-shift', '-insight', '-guide'];
 
 const args = parseArgs(process.argv.slice(2));
@@ -86,10 +87,23 @@ async function main() {
     ? buildVariationSlug(sourceSlug)
     : slugify(finalTitle);
   const outputFile = path.join(process.cwd(), 'blog', targetSlug + '.html');
+  const feederPostUrl = `${SITE_BASE}/blog/${targetSlug}.html`;
 
   if (sourceSlug && fs.existsSync(outputFile)) {
     console.log('Existing feeder variation already present:', outputFile);
-    console.log('Skipping duplicate trigger for source slug:', sourceSlug);
+    const existingHtml = fs.readFileSync(outputFile, 'utf8');
+    await notifyMainRepo({
+      sourceSlug,
+      sourceUrl: voaUrl,
+      sourceTitle: voaTitle,
+      sourceLane: voaLane,
+      feederStatus: 'success',
+      feederPostUrl,
+      feederTimestamp: new Date().toISOString(),
+      backlinkConfirmed: backlinkExists(existingHtml, voaUrl),
+      backlinkSourceUrl: voaUrl,
+    });
+    console.log('Callback sent for existing feeder variation.');
     process.exit(0);
   }
 
@@ -127,6 +141,18 @@ async function main() {
   } else {
     console.log('GITHUB_TOKEN not set ~ skipping git push.');
   }
+
+  await notifyMainRepo({
+    sourceSlug,
+    sourceUrl: voaUrl,
+    sourceTitle: voaTitle,
+    sourceLane: voaLane,
+    feederStatus: 'success',
+    feederPostUrl,
+    feederTimestamp: new Date().toISOString(),
+    backlinkConfirmed: backlinkExists(pageHtml, voaUrl),
+    backlinkSourceUrl: voaUrl,
+  });
 }
 
 async function generateArticle(context) {
@@ -364,6 +390,52 @@ function ensureBacklink(bodyHtml, voaUrl, voaTitle) {
   const anchor = escHtml(voaTitle || 'the original Vibration of Awesome post');
   const backlink = `<p>For the full original piece, read <a href="${escAttr(voaUrl)}">${anchor}</a> on Vibration of Awesome.</p>`;
   return bodyHtml.replace(/\s+$/, '') + '\n\n' + backlink;
+}
+
+function backlinkExists(html, voaUrl) {
+  return !!(html && voaUrl && html.includes(voaUrl));
+}
+
+async function notifyMainRepo(payload) {
+  const token = process.env.VOA_FEEDER_TRIGGER_TOKEN;
+  if (!token) {
+    console.log('VOA_FEEDER_TRIGGER_TOKEN not set ~ skipping main repo callback.');
+    return;
+  }
+  if (!payload.sourceSlug) {
+    console.log('Source slug missing ~ skipping main repo callback.');
+    return;
+  }
+
+  const resp = await fetch(`https://api.github.com/repos/${MAIN_REPO}/dispatches`, {
+    method: 'POST',
+    headers: {
+      Authorization: `token ${token}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      event_type: 'voa-feeder-published',
+      client_payload: {
+        source_slug: payload.sourceSlug,
+        source_url: payload.sourceUrl || '',
+        source_title: payload.sourceTitle || '',
+        source_lane: payload.sourceLane || '',
+        feeder_status: payload.feederStatus || 'success',
+        feeder_post_url: payload.feederPostUrl || '',
+        feeder_timestamp: payload.feederTimestamp || new Date().toISOString(),
+        backlink_confirmed: payload.backlinkConfirmed ? 'true' : 'false',
+        backlink_source_url: payload.backlinkSourceUrl || payload.sourceUrl || '',
+      },
+    }),
+  });
+
+  if (!resp.ok) {
+    const body = await resp.text();
+    console.warn(`Main repo callback failed (${resp.status}): ${body}`);
+    return;
+  }
+  console.log('Callback sent to VibrationofAwesome.');
 }
 
 function buildPage(context) {
