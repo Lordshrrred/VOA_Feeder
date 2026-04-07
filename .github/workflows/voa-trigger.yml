@@ -13,7 +13,12 @@ name: VOA Trigger ~ Auto Feeder Post
 #       "voa_post_url": "https://vibrationofawesome.com/your-post-slug/",
 #       "voa_post_title": "Your VOA Post Title",
 #       "voa_post_keyword": "your keyword",
-#       "voa_post_slug": "your-post-slug"
+#       "voa_post_slug": "your-post-slug",
+#       "voa_post_lane": "matt",
+#       "voa_post_excerpt": "short excerpt",
+#       "voa_post_tags": "archive, legacy",
+#       "voa_post_category": "Inner Work",
+#       "voa_post_source_text": "optional source body excerpt"
 #     }
 #   }'
 #
@@ -51,7 +56,11 @@ jobs:
         run: |
           node scripts/generate-post.js \
             --keyword "${{ github.event.client_payload.voa_post_keyword }}" \
-            --category "Breaking Out" \
+            --category "${{ github.event.client_payload.voa_post_category || 'Breaking Out' }}" \
             --voa_post_url "${{ github.event.client_payload.voa_post_url }}" \
             --voa_post_title "${{ github.event.client_payload.voa_post_title }}" \
-            --voa_post_slug "${{ github.event.client_payload.voa_post_slug }}"
+            --voa_post_slug "${{ github.event.client_payload.voa_post_slug }}" \
+            --voa_post_lane "${{ github.event.client_payload.voa_post_lane }}" \
+            --voa_post_excerpt "${{ github.event.client_payload.voa_post_excerpt }}" \
+            --voa_post_tags "${{ github.event.client_payload.voa_post_tags }}" \
+            --voa_post_source_text "${{ github.event.client_payload.voa_post_source_text }}"

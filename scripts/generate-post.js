@@ -39,6 +39,10 @@ const category = String(args['category'] || 'Breaking Out').trim();
 const voaUrl = String(args['voa_post_url'] || '').trim() || null;
 const voaTitle = String(args['voa_post_title'] || '').trim() || null;
 const providedSourceSlug = String(args['voa_post_slug'] || '').trim();
+const voaLane = String(args['voa_post_lane'] || '').trim();
+const voaExcerpt = String(args['voa_post_excerpt'] || '').trim();
+const voaTags = String(args['voa_post_tags'] || '').trim();
+const voaSourceText = String(args['voa_post_source_text'] || '').trim();
 
 if (!manualTitle && !voaUrl) {
   console.error('Error: provide --title for manual runs or --voa_post_url for source-triggered runs.');
@@ -61,13 +65,18 @@ main().catch(function (err) {
 
 async function main() {
   const sourceSlug = providedSourceSlug || extractSourceSlug(voaUrl) || '';
-  const sourceContext = voaUrl ? await fetchSourceContext(voaUrl, voaTitle) : null;
+  const sourceContext = voaUrl
+    ? await fetchSourceContext(voaUrl, voaTitle, { excerpt: voaExcerpt, sourceText: voaSourceText, tags: voaTags, lane: voaLane })
+    : null;
   const generation = await generateArticle({
     keyword,
     manualTitle,
     category,
     voaUrl,
     voaTitle,
+    voaLane,
+    voaExcerpt,
+    voaTags,
     sourceSlug,
     sourceContext,
   });
@@ -163,6 +172,15 @@ function buildUserPrompt(context) {
   if (context.voaTitle) {
     lines.push(`Source title: ${context.voaTitle}`);
   }
+  if (context.voaLane) {
+    lines.push(`Source lane: ${context.voaLane}`);
+  }
+  if (context.voaTags) {
+    lines.push(`Source tags: ${context.voaTags}`);
+  }
+  if (context.voaExcerpt) {
+    lines.push(`Source excerpt: ${context.voaExcerpt}`);
+  }
   if (context.sourceSlug) {
     lines.push(`Source slug: ${context.sourceSlug}`);
   }
@@ -244,7 +262,19 @@ function parseClaudeResponse(raw, context) {
   return { title, metaDescription, bodyHtml };
 }
 
-async function fetchSourceContext(url, fallbackTitle) {
+async function fetchSourceContext(url, fallbackTitle, provided = {}) {
+  const providedContext = [
+    fallbackTitle ? `TITLE: ${fallbackTitle}` : '',
+    provided.excerpt ? `EXCERPT: ${provided.excerpt}` : '',
+    provided.tags ? `TAGS: ${provided.tags}` : '',
+    provided.lane ? `LANE: ${provided.lane}` : '',
+    provided.sourceText ? `BODY: ${provided.sourceText}` : '',
+  ].filter(Boolean).join('\n');
+
+  if (provided.sourceText) {
+    return providedContext;
+  }
+
   try {
     const resp = await fetch(url, { redirect: 'follow' });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -254,11 +284,14 @@ async function fetchSourceContext(url, fallbackTitle) {
     const excerpt = stripHtml(article).replace(/\s+/g, ' ').trim().slice(0, 5000);
     return [
       sourceTitle ? `TITLE: ${sourceTitle}` : '',
+      provided.excerpt ? `EXCERPT: ${provided.excerpt}` : '',
+      provided.tags ? `TAGS: ${provided.tags}` : '',
+      provided.lane ? `LANE: ${provided.lane}` : '',
       excerpt ? `BODY: ${excerpt}` : '',
     ].filter(Boolean).join('\n');
   } catch (err) {
     console.warn('Warning: could not fetch source article context:', err.message);
-    return fallbackTitle ? `TITLE: ${fallbackTitle}` : '';
+    return providedContext || (fallbackTitle ? `TITLE: ${fallbackTitle}` : '');
   }
 }
 
