@@ -32,6 +32,10 @@ on:
     types:
       - voa-post-published
 
+concurrency:
+  group: feeder-publish
+  cancel-in-progress: false
+
 jobs:
   generate-feeder-post:
     runs-on: ubuntu-latest

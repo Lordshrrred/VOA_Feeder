@@ -619,6 +619,7 @@ function gitPush(slug, title) {
     execSync('git config user.name "GitHub Actions"', { stdio: 'inherit' });
     execSync(`git add blog/${slug}.html blog/posts.json sitemap.xml`, { stdio: 'inherit' });
     execSync(`git commit -m "Add post: ${title.replace(/"/g, "'")}"`, { stdio: 'inherit' });
+    execSync('git pull --rebase origin main', { stdio: 'inherit' });
     execSync('git push', { stdio: 'inherit' });
     console.log('Pushed to GitHub.');
   } catch (err) {

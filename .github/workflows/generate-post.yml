@@ -21,6 +21,10 @@ on:
           - Inner Work
           - AI + Music + Creator Tools
 
+concurrency:
+  group: feeder-publish
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
