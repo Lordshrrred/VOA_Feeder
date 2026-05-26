@@ -58,14 +58,25 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VOA_FEEDER_TRIGGER_TOKEN: ${{ secrets.VOA_FEEDER_TRIGGER_TOKEN }}
+          # Keep repository_dispatch payload out of the shell script itself.
+          # Source text can contain Markdown fences/backticks, quotes, and newlines.
+          VOA_POST_KEYWORD: ${{ github.event.client_payload.voa_post_keyword }}
+          VOA_POST_CATEGORY: ${{ github.event.client_payload.voa_post_category || 'Breaking Out' }}
+          VOA_POST_URL: ${{ github.event.client_payload.voa_post_url }}
+          VOA_POST_TITLE: ${{ github.event.client_payload.voa_post_title }}
+          VOA_POST_SLUG: ${{ github.event.client_payload.voa_post_slug }}
+          VOA_POST_LANE: ${{ github.event.client_payload.voa_post_lane }}
+          VOA_POST_EXCERPT: ${{ github.event.client_payload.voa_post_excerpt }}
+          VOA_POST_TAGS: ${{ github.event.client_payload.voa_post_tags }}
+          VOA_POST_SOURCE_TEXT: ${{ github.event.client_payload.voa_post_source_text }}
         run: |
           node scripts/generate-post.js \
-            --keyword "${{ github.event.client_payload.voa_post_keyword }}" \
-            --category "${{ github.event.client_payload.voa_post_category || 'Breaking Out' }}" \
-            --voa_post_url "${{ github.event.client_payload.voa_post_url }}" \
-            --voa_post_title "${{ github.event.client_payload.voa_post_title }}" \
-            --voa_post_slug "${{ github.event.client_payload.voa_post_slug }}" \
-            --voa_post_lane "${{ github.event.client_payload.voa_post_lane }}" \
-            --voa_post_excerpt "${{ github.event.client_payload.voa_post_excerpt }}" \
-            --voa_post_tags "${{ github.event.client_payload.voa_post_tags }}" \
-            --voa_post_source_text "${{ github.event.client_payload.voa_post_source_text }}"
+            --keyword "$VOA_POST_KEYWORD" \
+            --category "$VOA_POST_CATEGORY" \
+            --voa_post_url "$VOA_POST_URL" \
+            --voa_post_title "$VOA_POST_TITLE" \
+            --voa_post_slug "$VOA_POST_SLUG" \
+            --voa_post_lane "$VOA_POST_LANE" \
+            --voa_post_excerpt "$VOA_POST_EXCERPT" \
+            --voa_post_tags "$VOA_POST_TAGS" \
+            --voa_post_source_text "$VOA_POST_SOURCE_TEXT"
