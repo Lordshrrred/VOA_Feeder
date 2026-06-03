@@ -222,4 +222,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/blog/how-to-create-your-first-claude-skill-with-a-unique-voice-signal.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
