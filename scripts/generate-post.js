@@ -228,7 +228,7 @@ function buildUserPrompt(context) {
 function callClaude(system, user) {
   return new Promise(function (resolve, reject) {
     const body = JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 2600,
       system: system,
       messages: [{ role: 'user', content: user }]
