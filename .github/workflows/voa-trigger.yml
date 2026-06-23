@@ -69,7 +69,10 @@ jobs:
           VOA_POST_EXCERPT: ${{ github.event.client_payload.voa_post_excerpt }}
           VOA_POST_TAGS: ${{ github.event.client_payload.voa_post_tags }}
           VOA_POST_SOURCE_TEXT: ${{ github.event.client_payload.voa_post_source_text }}
+          VOA_POST_DATE: ${{ github.event.client_payload.voa_post_date }}
         run: |
+          OVERRIDE_DATE_ARG=""
+          [ -n "$VOA_POST_DATE" ] && OVERRIDE_DATE_ARG="--override_date $VOA_POST_DATE"
           node scripts/generate-post.js \
             --keyword "$VOA_POST_KEYWORD" \
             --category "$VOA_POST_CATEGORY" \
@@ -79,4 +82,5 @@ jobs:
             --voa_post_lane "$VOA_POST_LANE" \
             --voa_post_excerpt "$VOA_POST_EXCERPT" \
             --voa_post_tags "$VOA_POST_TAGS" \
-            --voa_post_source_text "$VOA_POST_SOURCE_TEXT"
+            --voa_post_source_text "$VOA_POST_SOURCE_TEXT" \
+            $OVERRIDE_DATE_ARG

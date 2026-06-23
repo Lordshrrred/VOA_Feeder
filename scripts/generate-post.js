@@ -44,6 +44,8 @@ const voaLane = String(args['voa_post_lane'] || '').trim();
 const voaExcerpt = String(args['voa_post_excerpt'] || '').trim();
 const voaTags = String(args['voa_post_tags'] || '').trim();
 const voaSourceText = String(args['voa_post_source_text'] || '').trim();
+// Optional: backfill runs pass the original VOA publish date so feeder posts are backdated
+const overrideDate = String(args['override_date'] || process.env.VOA_POST_DATE || '').trim();
 
 if (!manualTitle && !voaUrl) {
   console.error('Error: provide --title for manual runs or --voa_post_url for source-triggered runs.');
@@ -107,7 +109,9 @@ async function main() {
     process.exit(0);
   }
 
-  const date = new Date().toISOString().split('T')[0];
+  const date = (overrideDate && /^\d{4}-\d{2}-\d{2}$/.test(overrideDate))
+    ? overrideDate
+    : new Date().toISOString().split('T')[0];
   const htmlBody = ensureBacklink(generation.bodyHtml, voaUrl, voaTitle);
   const pageHtml = buildPage({
     title: finalTitle,
