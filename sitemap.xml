@@ -696,4 +696,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/blog/how-to-clone-your-voice-with-elevenlabs-and-heygen-signal.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
