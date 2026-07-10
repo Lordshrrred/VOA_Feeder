@@ -37,7 +37,7 @@ const args = parseArgs(process.argv.slice(2));
 const keyword = String(args['keyword'] || '').trim();
 const manualTitle = String(args['title'] || '').trim();
 const category = String(args['category'] || 'Breaking Out').trim();
-const voaUrl = String(args['voa_post_url'] || '').trim() || null;
+const voaUrl = cleanVoaUrl(String(args['voa_post_url'] || '').trim()) || null;
 const voaTitle = String(args['voa_post_title'] || '').trim() || null;
 const providedSourceSlug = String(args['voa_post_slug'] || '').trim();
 const voaLane = String(args['voa_post_lane'] || '').trim();
@@ -387,6 +387,12 @@ function extractSourceSlug(url) {
   } catch (_) {
     return '';
   }
+}
+
+function cleanVoaUrl(url) {
+  if (!url) return '';
+  return String(url)
+    .replace(/(https:\/\/vibrationofawesome\.com\/blog\/(?:boom|matt)\/posts\/[^#?\s"')]+?)\.html(?=([#?\s"').,!]|$))/gi, '$1');
 }
 
 function ensureBacklink(bodyHtml, voaUrl, voaTitle) {
