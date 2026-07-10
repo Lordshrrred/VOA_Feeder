@@ -120,6 +120,8 @@ async function main() {
     date,
     metaDescription: generation.metaDescription,
     bodyHtml: htmlBody,
+    voaUrl,
+    voaTitle,
   });
 
   fs.mkdirSync(path.dirname(outputFile), { recursive: true });
@@ -443,11 +445,28 @@ async function notifyMainRepo(payload) {
 }
 
 function buildPage(context) {
-  const canonical = `${SITE_BASE}/blog/${context.slug}.html`;
+  const feederUrl = `${SITE_BASE}/blog/${context.slug}.html`;
+  // Bug fix (2026-07-11): this was previously always feederUrl, making every
+  // feeder page its own canonical ~ Google saw it as original content
+  // competing with the VOA post it's a companion piece to, instead of
+  // correctly funneling authority back to vibrationofawesome.com. Falls back
+  // to feederUrl only for the rare manual-title post with no VOA source.
+  const canonical = context.voaUrl || feederUrl;
   const displayDate = new Date(context.date + 'T00:00:00').toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric'
   });
   const yr = new Date().getFullYear();
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Frequency Rising',
+    url: SITE_BASE,
+    parentOrganization: {
+      '@type': 'Organization',
+      name: 'Vibration of Awesome',
+      url: 'https://vibrationofawesome.com',
+    },
+  };
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -461,9 +480,10 @@ function buildPage(context) {
   <meta property="og:type" content="article">
   <meta property="og:title" content="${escHtml(context.title)} ~ Frequency Rising">
   <meta property="og:description" content="${escHtml(context.metaDescription)}">
-  <meta property="og:url" content="${canonical}">
+  <meta property="og:url" content="${feederUrl}">
   <meta property="og:site_name" content="Frequency Rising">
   <meta property="article:published_time" content="${context.date}">
+  <script type="application/ld+json">${JSON.stringify(orgSchema)}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
