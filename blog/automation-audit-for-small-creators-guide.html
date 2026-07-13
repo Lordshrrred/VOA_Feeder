@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When Your Automation Stack Is Quietly Betraying You ~ Frequency Rising</title>
+  <meta name="description" content="Running automations you haven't checked in months? Here's how to do an automation audit that actually finds the rot before it costs you trust.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://vibrationofawesome.com/blog/boom/posts/automation-audit-for-small-creators">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="When Your Automation Stack Is Quietly Betraying You ~ Frequency Rising">
+  <meta property="og:description" content="Running automations you haven't checked in months? Here's how to do an automation audit that actually finds the rot before it costs you trust.">
+  <meta property="og:url" content="https://lordshrrred.github.io/VOA_Feeder/blog/automation-audit-for-small-creators-guide.html">
+  <meta property="og:site_name" content="Frequency Rising">
+  <meta property="article:published_time" content="2026-07-13">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Frequency Rising","url":"https://lordshrrred.github.io/VOA_Feeder","parentOrganization":{"@type":"Organization","name":"Vibration of Awesome","url":"https://vibrationofawesome.com"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0f0a; --bg2: #0e140e; --border: #1a271a;
+      --lime: #39FF14; --lime-dim: #2dcc10;
+      --cyan: #00FFFF; --cyan-dim: #00cccc;
+      --text: #d8e8d8; --muted: #6a8a6a; --max: 1080px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.05rem; line-height: 1.75;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    a { color: var(--cyan); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--cyan-dim); text-decoration: underline; }
+    h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 800; line-height: 1.25; color: #fff; }
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    main { flex: 1; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 99;
+      background: rgba(10,15,10,.93);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem; max-width: var(--max); margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--lime);
+    }
+    .nav-logo:hover { color: var(--lime-dim); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--lime); text-decoration: none; }
+
+    .post-wrap { max-width: 720px; padding: 3.5rem 0 5rem; }
+    .section-label {
+      display: inline-block; font-family: 'Inter', sans-serif;
+      font-size: .7rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--lime); margin-bottom: .75rem;
+    }
+    .post-wrap h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); margin-bottom: .75rem; }
+    .post-meta {
+      font-family: 'Inter', sans-serif; font-size: .82rem; color: var(--muted);
+      margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .post-meta .cat { color: var(--lime); font-weight: 700; }
+    .post-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    .post-body h2 { font-size: 1.45rem; margin: 2.5rem 0 .9rem; }
+    .post-body h3 { font-size: 1.15rem; color: var(--lime); margin: 2rem 0 .7rem; }
+    .post-body p  { margin-bottom: 1.3rem; }
+    .post-body ul, .post-body ol { margin: 0 0 1.3rem 1.5rem; }
+    .post-body li { margin-bottom: .4rem; }
+    .post-body strong { color: #fff; font-weight: 600; }
+    .post-body a { color: var(--cyan); }
+
+    .footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: auto; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .footer-brand {
+      font-family: 'Inter', sans-serif; font-weight: 800; font-size: .9rem;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--lime);
+      display: block; margin-bottom: .5rem;
+    }
+    .footer p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .footer a { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .nav-inner { flex-direction: column; gap: .75rem; }
+      .nav-links { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Frequency Rising</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <article class="wrap">
+      <div class="post-wrap">
+        <span class="section-label">Breaking Out</span>
+        <h1>When Your Automation Stack Is Quietly Betraying You</h1>
+        <div class="post-meta">
+          <span class="cat">Breaking Out</span>
+          <time datetime="2026-07-13">July 13, 2026</time>
+        </div>
+        <hr class="post-divider">
+        <div class="post-body">
+          <h2>The Silent Sabotage Hiding in Your Workflow</h2>
+
+<p>Here is a fun little horror story. A creator spends weeks building out their welcome sequence, their onboarding emails, their social posting schedule, their Zap that tags new subscribers based on lead magnet. Everything fires. Everything looks great. They move on to the next thing.</p>
+
+<p>Six months later, a new subscriber replies to that welcome sequence asking about "the offer on your homepage" and the creator realizes... they changed their offer four months ago. The homepage is different. The email is still pointing people toward something that no longer exists. And who knows how many people quietly bounced because of it.</p>
+
+<p>This is not a rare edge case. This is how most small creators live. Automation rot is one of the most expensive invisible problems in a solo operation, and it costs you in trust, in conversions, and in time you spend wondering why things aren't working the way they used to.</p>
+
+<p>An <a href="https://vibrationofawesome.com/blog/boom/posts/automation-audit-for-small-creators">Automation Audit For Small Creators</a> is the practice of deliberately stopping, looking around, and cleaning up the automated systems running in the background of your business. This guide gives you a grounded, honest process for doing exactly that.</p>
+
+<h2>Why Small Creators Are Especially Vulnerable to Automation Rot</h2>
+
+<p>Big companies have operations teams. Someone's literal job is to monitor whether the email sequences are still firing correctly and whether the Zaps are still connecting to live endpoints. Small creators have themselves, and themselves are usually heads-down making content, managing launches, and handling customer questions.</p>
+
+<p>Automation gets built during a burst of energy. You are organized, motivated, and future-thinking. You set things up, they work, and then you move on. But your business keeps evolving. Offers change. Platforms update. Freebies get retired. Pricing shifts. The automation does not know any of this. It keeps humming along, pointing people toward old versions of you.</p>
+
+<p>The longer you go without auditing, the more your automated systems reflect a past version of your business rather than the one you are actually running today.</p>
+
+<h2>Step One: Pull the Full Inventory Before You Touch Anything</h2>
+
+<p>The biggest mistake people make when doing a cleanup is jumping straight into fixing. Before you fix anything, you need to see everything. Open a simple spreadsheet. Four columns: name of the automation, what it is supposed to do, which platform it lives on, and when it last ran.</p>
+
+<h3>Where to go hunting</h3>
+
+<ul>
+<li>Your email marketing platform, including active sequences, triggered automations, and any tagging rules</li>
+<li>Your Zapier or Make account, filtered to active only and sorted by last run date</li>
+<li>Your course platform if you use one, especially any drip content or onboarding flows</li>
+<li>Your checkout system and any post-purchase automations attached to it</li>
+<li>Any form tool you use, including simple Google Forms that might have a webhook you forgot about</li>
+<li>Your social scheduling tool, especially any recurring or recycled posts</li>
+</ul>
+
+<p>Most creators who think they have five or six automations find twelve to twenty when they actually look. That surprise is useful information. You cannot make good decisions about a system you cannot fully see.</p>
+
+<h2>Step Two: Ask the Three Honest Questions About Each One</h2>
+
+<p>Once you have the inventory, go through each automation and answer these three questions. Do not rush this part. The discomfort of answering honestly is the whole point.</p>
+
+<h3>Is this automation actually still running?</h3>
+
+<p>Check the last triggered date. If something has not fired in 90 days, you have two possibilities. Either nobody is entering the trigger point anymore, which might mean your lead magnet is stale or that funnel is broken upstream. Or the automation itself is broken and silently failing. Both of those situations deserve attention.</p>
+
+<h3>Does every destination in this automation still exist?</h3>
+
+<p>Click every single link inside every active email sequence. Every one. This takes time. Do it anyway. Check that every page the automation points to actually loads, actually makes sense for where you are now, and actually reflects your current offer, pricing, and branding. A nurture sequence pointing to a retired offer is not neutral. It actively damages the relationship you are trying to build.</p>
+
+<h3>Does the logic of this automation still match the business you are running today?</h3>
+
+<p>This question is the one that tends to sting a little. You built that automation when your positioning was different, your audience was smaller, your offer was different, your tone was different. Does the automated version of you still sound like the actual you? Does the sequence still make sense given everything that has changed? An onboarding email that references an old freebie, an old brand name, or a problem framing you have moved away from is quietly sending mixed signals to everyone who goes through it.</p>
+
+<h2>Step Three: Triage What You Find</h2>
+
+<p>After going through the inventory, you will have a mess. That is normal. The goal of triage is to sort it into three buckets so you are not overwhelmed trying to fix everything at once.</p>
+
+<h3>Kill it</h3>
+
+<p>Some automations just need to be turned off. If the offer it supports is gone, if the event it was tied to is over, if the logic makes zero sense anymore and rebuilding it would take longer than starting fresh, shut it down. Clean deletion is underrated. Fewer automations running cleanly beats a bloated stack of half-broken ones every time.</p>
+
+<h3>Fix it this week</h3>
+
+<p>These are automations that are still fundamentally useful but have broken links, outdated language, or small logic errors. Queue these up as focused one-hour work sessions, not sprawling projects. Update the link. Rewrite the paragraph. Fix the tag. Move on.</p>
+
+<h3>Review it next quarter</h3>
+
+<p>Some automations are running fine but need a deeper rethink that you cannot do right now without clarity on where your business is going. Flag those. Do not rebuild them during an audit. Rebuilding during an audit is how audits turn into three-week rabbit holes.</p>
+
+<h2>The Part Most Audit Guides Skip: The Performance Check</h2>
+
+<p>An automation running without errors is not the same as an automation that is actually helping anyone. Pull the numbers for every sequence still on your active list. Open rates. Click rates. Reply rates if your platform tracks them. Unsubscribe spikes at specific emails in a sequence.</p>
+
+<p>A welcome sequence with a 14 percent open rate on email three is telling you something. Either the subject line is wrong, the content lost the thread, or the people entering this sequence were never a good fit for where it leads. Low engagement on automated content is not just a vanity metric problem. It trains email providers to treat your messages as low-priority, which means your future campaigns suffer too.</p>
+
+<p>Use the numbers to make actual decisions, not just to feel informed. If email four in your sequence gets a 4 percent open rate and a 0.2 percent click rate, that email is not doing its job. Rewrite it or cut it.</p>
+
+<h2>Building the Habit So You Never Have to Do a Massive Cleanup Again</h2>
+
+<p>The goal of doing a thorough audit once is to make future audits light and quick. After your first full audit, set a quarterly reminder to do a 30-minute version. Check last run dates. Click through any sequence you updated or launched since the last check. Look for any Zaps that stopped running. Ask the three questions for anything new you built.</p>
+
+<p>Thirty minutes every three months is infinitely more manageable than the six-hour excavation project you just completed. The audit is not a punishment. It is the maintenance that keeps your automated systems actually working for you rather than quietly working against you while you sleep.</p>
+
+<p>Small creators who treat their automation stack like a living thing, something that needs tending and updating rather than just building and forgetting, are the ones who notice when something breaks before a subscriber does. That small edge compounds into a significantly cleaner, more trustworthy operation over time.</p>
+
+<p>Start with the inventory. Do the hard questions. Triage honestly. Then set the reminder and do it again in 90 days.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Frequency Rising</span>
+      <p>Independent signal for people breaking out and leveling up.</p>
+      <p>A <a href="https://vibrationofawesome.com" target="_blank" rel="noopener">Vibration of Awesome</a> affiliate site.</p>
+      <p>&copy; 2026 Frequency Rising. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
