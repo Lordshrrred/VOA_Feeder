@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Google Doc Is Already a Website. You Just Haven't Flipped the Switch Yet. ~ Frequency Rising</title>
+  <meta name="description" content="Got content trapped in Google Docs? Here's how to turn it into a real, live website without coding, subscriptions, or losing your mind.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://vibrationofawesome.com/blog/boom/posts/how-to-turn-google-docs-into-a-website">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Your Google Doc Is Already a Website. You Just Haven't Flipped the Switch Yet. ~ Frequency Rising">
+  <meta property="og:description" content="Got content trapped in Google Docs? Here's how to turn it into a real, live website without coding, subscriptions, or losing your mind.">
+  <meta property="og:url" content="https://lordshrrred.github.io/VOA_Feeder/blog/how-to-turn-google-docs-into-a-website-guide.html">
+  <meta property="og:site_name" content="Frequency Rising">
+  <meta property="article:published_time" content="2026-07-18">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Frequency Rising","url":"https://lordshrrred.github.io/VOA_Feeder","parentOrganization":{"@type":"Organization","name":"Vibration of Awesome","url":"https://vibrationofawesome.com"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0f0a; --bg2: #0e140e; --border: #1a271a;
+      --lime: #39FF14; --lime-dim: #2dcc10;
+      --cyan: #00FFFF; --cyan-dim: #00cccc;
+      --text: #d8e8d8; --muted: #6a8a6a; --max: 1080px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.05rem; line-height: 1.75;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    a { color: var(--cyan); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--cyan-dim); text-decoration: underline; }
+    h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 800; line-height: 1.25; color: #fff; }
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    main { flex: 1; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 99;
+      background: rgba(10,15,10,.93);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem; max-width: var(--max); margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--lime);
+    }
+    .nav-logo:hover { color: var(--lime-dim); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--lime); text-decoration: none; }
+
+    .post-wrap { max-width: 720px; padding: 3.5rem 0 5rem; }
+    .section-label {
+      display: inline-block; font-family: 'Inter', sans-serif;
+      font-size: .7rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--lime); margin-bottom: .75rem;
+    }
+    .post-wrap h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); margin-bottom: .75rem; }
+    .post-meta {
+      font-family: 'Inter', sans-serif; font-size: .82rem; color: var(--muted);
+      margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .post-meta .cat { color: var(--lime); font-weight: 700; }
+    .post-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    .post-body h2 { font-size: 1.45rem; margin: 2.5rem 0 .9rem; }
+    .post-body h3 { font-size: 1.15rem; color: var(--lime); margin: 2rem 0 .7rem; }
+    .post-body p  { margin-bottom: 1.3rem; }
+    .post-body ul, .post-body ol { margin: 0 0 1.3rem 1.5rem; }
+    .post-body li { margin-bottom: .4rem; }
+    .post-body strong { color: #fff; font-weight: 600; }
+    .post-body a { color: var(--cyan); }
+
+    .footer { border-top: 1px solid var(--border); padding: 2.5rem 0; margin-top: auto; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .footer-brand {
+      font-family: 'Inter', sans-serif; font-weight: 800; font-size: .9rem;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--lime);
+      display: block; margin-bottom: .5rem;
+    }
+    .footer p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .footer a { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .nav-inner { flex-direction: column; gap: .75rem; }
+      .nav-links { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Frequency Rising</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Blog</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <article class="wrap">
+      <div class="post-wrap">
+        <span class="section-label">Breaking Out</span>
+        <h1>Your Google Doc Is Already a Website. You Just Haven't Flipped the Switch Yet.</h1>
+        <div class="post-meta">
+          <span class="cat">Breaking Out</span>
+          <time datetime="2026-07-18">July 18, 2026</time>
+        </div>
+        <hr class="post-divider">
+        <div class="post-body">
+          <p>There is a specific kind of frustration that comes from knowing you have something worth sharing and having absolutely no idea how to get it in front of people. You wrote the thing. It lives in a Google Doc. And there it sits, invisible, like a song nobody can hear because it never left the studio.</p>
+
+<p>The good news is that Google Docs and the tools built around them have quietly gotten very good at solving this problem. You do not need a developer. You do not need a $40 monthly subscription to a platform with a fifteen-minute onboarding video. You need a clear path and someone willing to explain it without the marketing fluff.</p>
+
+<p>This is that explanation. Here is how to turn Google Docs into a website, with multiple real methods depending on what you actually need.</p>
+
+<h2>First, Get Clear on What "Website" Means for You</h2>
+
+<p>Before picking a method, answer this honestly: what does success look like? A live URL someone can click and read is very different from a branded, custom-domain, designed-to-impress page. Both are websites. But the paths to each are different, and using the wrong method for your actual goal is how people end up frustrated and overthinking it.</p>
+
+<p>Ask yourself three things:</p>
+
+<ul>
+<li>Who is this for? Internal team, paying clients, or the general public?</li>
+<li>Does it need to look polished, or does it just need to work?</li>
+<li>How often will the content change?</li>
+</ul>
+
+<p>Your answers to those questions will determine which approach below actually fits your situation.</p>
+
+<h2>The Immediate Option: Publish to the Web, Right Now</h2>
+
+<p>Google Docs has a built-in publishing feature that most people walk right past. It is sitting in the File menu, labeled <strong>Publish to web</strong>, and it will generate a real, public, no-login-required URL in about fifteen seconds.</p>
+
+<h3>How to Do It</h3>
+
+<ol>
+<li>Open your Google Doc.</li>
+<li>Click <strong>File</strong> in the top menu.</li>
+<li>Select <strong>Share</strong>, then <strong>Publish to web</strong>.</li>
+<li>In the dialog box, click <strong>Publish</strong> and confirm.</li>
+<li>Copy the URL Google gives you.</li>
+</ol>
+
+<p>That URL works for anyone. No Google account needed on their end. The page renders your document as a clean, readable webpage with your headings, paragraphs, bullet points, and links all intact.</p>
+
+<h3>What You Get and What You Don't</h3>
+
+<p>What you get is speed and simplicity. The page updates automatically any time you edit the document. There is no file to upload, no deployment to trigger, no cache to clear. You edit the doc and the website reflects it, usually within a minute.</p>
+
+<p>What you do not get is visual control. The page looks like a Google Doc on a webpage, because that is exactly what it is. No custom colors, no logo placement, no fonts of your choosing. If your audience is internal, or if you just need a page to exist quickly, this is completely sufficient. Use it without apology.</p>
+
+<h2>The Readable, Shareable Option: Notion as a Middle Layer</h2>
+
+<p>Notion has become one of the more underrated tools for this specific use case. The workflow is simple: copy your Google Doc content into a Notion page, clean up the formatting slightly, then toggle the page to public. Notion gives you a shareable URL that is significantly cleaner and more readable than a raw published Google Doc.</p>
+
+<h3>Why Notion Works Well Here</h3>
+
+<p>Notion pages support callout blocks, toggles, tables, embedded media, and a much more flexible layout than standard Google Docs. If your content has multiple sections, a table of contents, or visual hierarchy that matters, Notion will render it better out of the box.</p>
+
+<p>The free tier of Notion allows unlimited public pages, which means cost is not a barrier. For creators building resource guides, client onboarding pages, or simple knowledge bases, this method gets you something that genuinely looks intentional without requiring any technical skill.</p>
+
+<h3>Going Further with a Custom Domain</h3>
+
+<p>If you want your Notion page to live at your own domain name rather than a notion.site URL, tools like Super.so or Potion.so sit in front of Notion and handle the domain mapping for you. These cost money monthly, but they are substantially cheaper than most website builders, and your content still lives in Notion where it is easy to edit.</p>
+
+<h2>The Real Website Option: Markdown Export Plus Static Site Tools</h2>
+
+<p>This is for people who want something that functions and looks like a proper website, is fast, is free to host, and is not dependent on any third-party platform staying alive or affordable forever.</p>
+
+<p>The full walkthrough for this approach is covered in detail over at Vibration of Awesome in their guide on <a href="https://vibrationofawesome.com/blog/boom/posts/how-to-turn-google-docs-into-a-website">How To Turn Google Docs Into A Website</a>, and it is worth reading alongside this piece if you are going the technical route. Here is the condensed version.</p>
+
+<h3>Step One: Get Your Doc Into Markdown</h3>
+
+<p>Install the free Chrome extension called <strong>Docs to Markdown</strong>. Open your Google Doc, run the extension, and it converts your entire document into clean Markdown text in under a minute. Copy that output.</p>
+
+<h3>Step Two: Pick a Static Site Generator</h3>
+
+<p>Static site generators take plain text or Markdown files and turn them into full HTML websites. For documentation-style content, <strong>MkDocs</strong> is straightforward and well-documented. For something more blog-like or flexible, <strong>Hugo</strong> or <strong>Eleventy</strong> are solid choices. All of them are free and open source.</p>
+
+<h3>Step Three: Host It for Free</h3>
+
+<p>GitHub Pages and Netlify both host static sites for free. You push your files to a repository, connect it to the hosting service, and your site is live at a real URL. Netlify in particular makes this nearly drag-and-drop. You can connect a custom domain you already own, or use the free subdomain they provide.</p>
+
+<p>The result is a website that loads fast, looks clean, and costs nothing per month to keep running. Your content stays in a format you own and can move anywhere.</p>
+
+<h2>Choosing the Right Method Without Overthinking It</h2>
+
+<p>Here is the honest summary:</p>
+
+<ul>
+<li><strong>Need something live in five minutes?</strong> Use Google's built-in Publish to web feature.</li>
+<li><strong>Want it to look clean without touching any code?</strong> Move it to Notion and make the page public.</li>
+<li><strong>Want full control, no monthly fees, and something that scales?</strong> Export to Markdown and use a static site generator with free hosting.</li>
+</ul>
+
+<p>None of these paths require you to learn web development from scratch. All of them result in something a real person can visit at a real URL. The difference is just how much polish and control matters to you at this stage.</p>
+
+<h2>The Thing People Miss About All of This</h2>
+
+<p>The point of turning a Google Doc into a website is not really about the technology. It is about removing the friction between the thing you made and the person who needs it. Every extra step between your content and your reader is a place where someone gives up and leaves.</p>
+
+<p>A published Google Doc is better than a doc nobody can find. A Notion page is better than a Google Doc link that requires sign-in. A real static site is better than a Notion page if your audience is the general public and credibility matters.</p>
+
+<p>Start with the method that removes the most friction right now. You can always upgrade the container later. The content is what matters. Get it visible first.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Frequency Rising</span>
+      <p>Independent signal for people breaking out and leveling up.</p>
+      <p>A <a href="https://vibrationofawesome.com" target="_blank" rel="noopener">Vibration of Awesome</a> affiliate site.</p>
+      <p>&copy; 2026 Frequency Rising. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
