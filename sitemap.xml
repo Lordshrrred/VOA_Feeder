@@ -1170,4 +1170,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/blog/i-keep-spinning-my-wheels-in-life-guide.html</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
