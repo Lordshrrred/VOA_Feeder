@@ -68,6 +68,34 @@ main().catch(function (err) {
 
 async function main() {
   const sourceSlug = providedSourceSlug || extractSourceSlug(voaUrl) || '';
+  const cachedSlug = sourceSlug ? buildVariationSlug(sourceSlug) : '';
+  const cachedFile = path.join(process.cwd(), 'blog', cachedSlug + '.html');
+  const cachedUrl = `${SITE_BASE}/blog/${cachedSlug}.html`;
+  if (sourceSlug && fs.existsSync(cachedFile)) {
+    console.log('Existing feeder variation already present:', cachedFile);
+    const existingHtml = fs.readFileSync(cachedFile, 'utf8');
+    await notifyMainRepo({
+      sourceSlug,
+      sourceUrl: voaUrl,
+      sourceTitle: voaTitle,
+      sourceLane: voaLane,
+      feederStatus: 'success',
+      feederPostUrl: cachedUrl,
+      feederTimestamp: new Date().toISOString(),
+      backlinkConfirmed: backlinkExists(existingHtml, voaUrl),
+      backlinkSourceUrl: voaUrl,
+    });
+    console.log('Callback sent for existing feeder variation.');
+    process.exit(0);
+  }
+
+  if ((voaLane === 'boom' || voaUrl?.includes('/blog/boom/')) && sourceSlug) {
+    const check = await fetch('https://vibrationofawesome.com/_data/article-redirects.json');
+    if (check.ok && (await check.json())[sourceSlug]) {
+      console.log('Retired source article; no new companion or API spend:', sourceSlug);
+      return;
+    }
+  }
   const sourceContext = voaUrl
     ? await fetchSourceContext(voaUrl, voaTitle, { excerpt: voaExcerpt, sourceText: voaSourceText, tags: voaTags, lane: voaLane })
     : null;
@@ -85,29 +113,15 @@ async function main() {
   });
 
   const finalTitle = ensureUniqueTitle(generation.title, voaTitle, keyword, sourceSlug);
+  const existingPosts = fs.existsSync(postsFile) ? JSON.parse(fs.readFileSync(postsFile, 'utf8')) : [];
+  const titleKey = value => String(value).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  if (existingPosts.some(post => titleKey(post.title) === titleKey(finalTitle))) throw new Error('Repeated feeder title blocked before saving: ' + finalTitle);
   const targetSlug = sourceSlug
     ? buildVariationSlug(sourceSlug)
     : slugify(finalTitle);
   const outputFile = path.join(process.cwd(), 'blog', targetSlug + '.html');
   const feederPostUrl = `${SITE_BASE}/blog/${targetSlug}.html`;
 
-  if (sourceSlug && fs.existsSync(outputFile)) {
-    console.log('Existing feeder variation already present:', outputFile);
-    const existingHtml = fs.readFileSync(outputFile, 'utf8');
-    await notifyMainRepo({
-      sourceSlug,
-      sourceUrl: voaUrl,
-      sourceTitle: voaTitle,
-      sourceLane: voaLane,
-      feederStatus: 'success',
-      feederPostUrl,
-      feederTimestamp: new Date().toISOString(),
-      backlinkConfirmed: backlinkExists(existingHtml, voaUrl),
-      backlinkSourceUrl: voaUrl,
-    });
-    console.log('Callback sent for existing feeder variation.');
-    process.exit(0);
-  }
 
   const date = (overrideDate && /^\d{4}-\d{2}-\d{2}$/.test(overrideDate))
     ? overrideDate
@@ -234,8 +248,10 @@ function buildUserPrompt(context) {
 function callClaude(system, user) {
   return new Promise(function (resolve, reject) {
     const body = JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 2600,
+      model: 'claude-sonnet-5-5',
+      thinking: { type: 'between_tools' },
+      output_config: { effort: 'medium' },
+      max_tokens: 3600,
       system: system,
       messages: [{ role: 'user', content: user }]
     });
@@ -259,7 +275,8 @@ function callClaude(system, user) {
         try {
           const parsed = JSON.parse(data);
           if (parsed.error) return reject(new Error(parsed.error.message));
-          const text = parsed.content && parsed.content[0] && parsed.content[0].text;
+          if (['max_tokens', 'refusal', 'model_context_window_exceeded'].includes(parsed.stop_reason)) return reject(new Error('Incomplete article: ' + parsed.stop_reason));
+          const text = (parsed.content || []).filter(block => block.type === 'text').map(block => block.text).join('\n');
           if (!text) return reject(new Error('No content in API response'));
           resolve(text);
         } catch (e) {

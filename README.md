@@ -10,6 +10,10 @@ An independent personal development blog and SEO feeder site for [vibrationofawe
 
 Frequency Rising covers identity shifts, breaking out of survival mode, creative freedom, inner work, and building a life that actually fits. Articles are written in a real, direct voice and link naturally to the main VOA brand.
 
+Writing uses Sonnet 5.5 at medium effort without up-front thinking. The generator checks existing source companions before any generation call, skips retired VOA sources, and rejects incomplete output. Run `node --test scripts/test-generation-preflight.js` for offline cost-control checks.
+
+Repeated titles were consolidated to established articles; retired GitHub Pages URLs retain immediate HTML redirects and are removed from the index/sitemap. Main-site canonical/backlink URLs point directly to retained VOA articles. Preview future consolidation with `node scripts/consolidate-articles.js` before using `--execute`.
+
 ---
 
 ## Publishing a post via GitHub Actions
