@@ -1794,4 +1794,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://lordshrrred.github.io/VOA_Feeder/blog/batching-admin-so-it-stops-eating-the-hours-you-need-for-making-insight.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
